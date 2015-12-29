@@ -5,15 +5,15 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class WithUuid implements Serializable {
+public abstract class WithUuid {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    protected UUID id;
+    private UUID id;
+
 
     public UUID getId() {
         return id;
