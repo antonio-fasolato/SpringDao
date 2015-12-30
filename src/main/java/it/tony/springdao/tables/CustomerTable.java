@@ -1,36 +1,48 @@
 package it.tony.springdao.tables;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.tony.springdao.model.Customer;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.Transient;
 
 @Entity(name = "customer")
+@Access(AccessType.PROPERTY)
 public class CustomerTable extends WithUuid {
-    private String name;
-    private int age;
+    private String serializedDto;
+    @Transient
+    private Customer customer;
 
-    public CustomerTable(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public CustomerTable() {
     }
 
-    public String getName() {
-        return name;
+    public CustomerTable(Customer customer) {
+        this.customer = customer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getSerializedDto() {
+        Gson g = new GsonBuilder().create();
+        serializedDto = g.toJson(customer);
+        return serializedDto;
     }
 
-    public int getAge() {
-        return age;
+    public void setSerializedDto(String serializedDto) {
+        this.serializedDto = serializedDto;
+        Gson g = new GsonBuilder().create();
+        customer = g.fromJson(this.serializedDto, Customer.class);
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    @Transient
+    public Customer getCustomer() {
+        return customer;
     }
+
+    @Transient
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 }

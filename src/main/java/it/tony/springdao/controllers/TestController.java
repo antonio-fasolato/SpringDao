@@ -1,5 +1,6 @@
 package it.tony.springdao.controllers;
 
+import it.tony.springdao.model.Customer;
 import it.tony.springdao.repositories.ICustomerRepository;
 import it.tony.springdao.tables.CustomerTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,11 @@ public class TestController {
     @RequestMapping("/")
     public String test() {
         try {
-            customerRepository.save(new CustomerTable("Antonio Fasolato", 35));
+            customerRepository.save(new CustomerTable(new Customer("Antonio", 35)));
+            Iterable<CustomerTable> all = customerRepository.findAll();
+            for(CustomerTable t : all) {
+                System.out.println(t.getCustomer());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
