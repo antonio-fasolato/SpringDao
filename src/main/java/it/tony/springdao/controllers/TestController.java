@@ -20,6 +20,9 @@ public class TestController {
             for (CustomerTable t : all) {
                 System.out.println(t.getEntity());
             }
+
+            CustomerTable t = customerRepository.findOne(7);
+            System.out.println(t.getEntity());
         } catch (Exception e) {
             e.printStackTrace();
         }
