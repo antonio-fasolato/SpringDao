@@ -4,14 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.tony.springdao.model.Customer;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity(name = "customer")
 @Access(AccessType.PROPERTY)
-public class CustomerTable extends WithUuid {
+public class CustomerTable {
     private String serializedDto;
     @Transient
     private Customer customer;
@@ -33,6 +30,20 @@ public class CustomerTable extends WithUuid {
         this.serializedDto = serializedDto;
         Gson g = new GsonBuilder().create();
         customer = g.fromJson(this.serializedDto, Customer.class);
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Integer getId() {
+        return customer == null ? null : customer.getId();
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public void setId(Integer id) {
+        if (customer != null) {
+            customer.setId(id);
+        }
     }
 
     @Transient
