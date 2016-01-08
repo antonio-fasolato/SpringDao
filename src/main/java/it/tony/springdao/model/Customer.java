@@ -3,8 +3,7 @@ package it.tony.springdao.model;
 /**
  * Created by ut0729 on 30/12/2015.
  */
-public class Customer {
-    private int id;
+public class Customer extends WithId {
     private String name;
     private int age;
 
@@ -19,17 +18,10 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
