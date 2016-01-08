@@ -5,7 +5,7 @@ import it.tony.springdao.model.Customer;
 import javax.persistence.Entity;
 
 @Entity(name = "customer")
-public class CustomerTable extends BaseTable<Customer> {
+public class CustomerTable extends StampedSerializedTable<Customer> {
     public CustomerTable(Customer entity) {
         super(entity, Customer.class);
     }

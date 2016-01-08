@@ -5,17 +5,24 @@ import com.google.gson.GsonBuilder;
 import it.tony.springdao.model.WithId;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public class BaseTable<T extends WithId> {
+public abstract class StampedSerializedTable<T extends WithId> {
     private T entity;
     private String serializedDto;
     private Class<T> wrapped;
+    private Date createdAt;
+    private String createdBy;
+    private Date modifiedAt;
+    private String modifiedBy;
 
-    public BaseTable(T entity, Class<T> wrapped) {
+    public StampedSerializedTable(T entity, Class<T> wrapped) {
         this.entity = entity;
         this.wrapped = wrapped;
+
+        createdAt = new Date();
     }
 
     @Transient
@@ -52,5 +59,37 @@ public class BaseTable<T extends WithId> {
         if (entity != null) {
             entity.setId(id);
         }
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }
