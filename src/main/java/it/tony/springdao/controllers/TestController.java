@@ -17,8 +17,8 @@ public class TestController {
         try {
             customerRepository.save(new CustomerTable(new Customer("Antonio", 35)));
             Iterable<CustomerTable> all = customerRepository.findAll();
-            for(CustomerTable t : all) {
-                System.out.println(t.getCustomer());
+            for (CustomerTable t : all) {
+                System.out.println(t.getEntity());
             }
         } catch (Exception e) {
             e.printStackTrace();
