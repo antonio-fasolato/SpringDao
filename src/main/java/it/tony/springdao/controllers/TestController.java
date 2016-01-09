@@ -29,6 +29,14 @@ public class TestController {
             System.out.println(t.getEntity());
             t.getEntity().setName("Modified");
             customerService.save(t.getEntity());
+
+            Iterable<Customer> l = customerService.getAll();
+            Customer last = null;
+            for(Customer c : l) {
+                last = c;
+                System.out.println(c.getId());
+            }
+            customerService.delete(last);
         } catch (Exception e) {
             e.printStackTrace();
         }
