@@ -19,24 +19,25 @@ public class TestController {
     @RequestMapping("/")
     public String test() {
         try {
-            customerService.save(new Customer("Antonio", 35));
+//            customerService.save(new Customer("Antonio", 35));
 //            Iterable<CustomerTable> all = customerRepository.findAll();
 //            for (CustomerTable t : all) {
 //                System.out.println(t.getEntity());
 //            }
 
-            CustomerTable t = customerRepository.findOne(7);
-            System.out.println(t.getEntity());
-            t.getEntity().setName("Modified");
-            customerService.save(t.getEntity());
+//            CustomerTable t = customerRepository.findOne(7);
+//            System.out.println(t.getEntity());
+//            t.getEntity().setName("Modified");
+//            customerService.save(t.getEntity());
 
             Iterable<Customer> l = customerService.getAllOrderByInsertDate();
-            Customer last = null;
+//            Customer last = null;
             for(Customer c : l) {
-                last = c;
-                System.out.println(c.getId());
+//                last = c;
+//                System.out.println(c.getId());
+                System.out.println(c);
             }
-            customerService.delete(last);
+//            customerService.delete(last);
         } catch (Exception e) {
             e.printStackTrace();
         }

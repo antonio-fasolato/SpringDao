@@ -13,9 +13,10 @@ public class CustomerService extends BaseService<ICustomerRepository, CustomerTa
         super(CustomerTable.class);
     }
 
-    @OrderBy("createdAt desc")
+//    @OrderBy("createdAt desc")
     public Iterable<Customer> getAllOrderByInsertDate() {
-        Iterable<CustomerTable> tList = repository.findAll();
+//        Iterable<CustomerTable> tList = repository.findAll();
+        List<CustomerTable> tList = repository.findAllOrdered();
         List<Customer> cList = new ArrayList<>();
         tList.forEach(t -> cList.add(t.getEntity()));
         return cList;
