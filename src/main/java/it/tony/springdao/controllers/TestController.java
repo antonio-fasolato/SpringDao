@@ -30,7 +30,7 @@ public class TestController {
             t.getEntity().setName("Modified");
             customerService.save(t.getEntity());
 
-            Iterable<Customer> l = customerService.getAll();
+            Iterable<Customer> l = customerService.getAllOrderByInsertDate();
             Customer last = null;
             for(Customer c : l) {
                 last = c;
